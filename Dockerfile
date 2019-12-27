@@ -10,6 +10,8 @@ RUN apt-get update -yq && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log
 
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
 # The nginx-light documentation says to use SIGQUIT for a "graceful shutdown"
 # but there's a bug in the way that SIGQUIT is handled by nginx-light so use
 # SIGTERM intead.
@@ -26,4 +28,4 @@ STOPSIGNAL SIGTERM
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx"]
